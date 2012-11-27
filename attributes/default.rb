@@ -16,7 +16,7 @@ default["monit"]["web_interface"] = {
   "enable"  => false,
   "port"    => 2812,
   "address" => "localhost",
-  "allow"   => ["localhost", "username:password"]
+  "allow"   => "name:pass"
 }
 
 default["monit"]["mail"] = {
@@ -39,3 +39,6 @@ else
   default["monit"]["main_config_path"] = "/etc/monit/monitrc"
   default["monit"]["includes_dir"] = "/etc/monit/conf.d"
 end
+
+
+default["monit"]["defaultfile"] = "/etc/default/monit"

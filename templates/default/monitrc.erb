@@ -63,8 +63,8 @@ set mail-format {
 <% if node['monit']['web_interface']['enable'] %>
 set httpd port <%= node['monit']['web_interface']['port'] %> and
   use address <%= node['monit']['web_interface']['address'] %>
-  <% node['monit']['web_interface']['allow'].each do |allow| -%>
-  allow <%= allow %>
+  <% if node['monit']['web_interface']['allow'] %>
+  allow <%= node['monit']['web_interface']['allow'] %>
   <% end %>
 <% end %>
 
@@ -82,7 +82,7 @@ set httpd port <%= node['monit']['web_interface']['port'] %> and
 #    if memory usage > 75% then alert
 #    if cpu usage (user) > 70% then alert
 #    if cpu usage (system) > 30% then alert
-#    if cpu usage (wait) > 20% then alert
+#    if cpu usage (wait) > 20% then alertss
 #
 #
 ## Check a file for existence, checksum, permissions, uid and gid. In addition
