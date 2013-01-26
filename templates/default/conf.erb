@@ -2,3 +2,18 @@ check process <%= @name %>
    <% if @pidfile %>
    with pidfile <%= @pidfile %>
    <% end %>
+   <% if @group %>
+   group <%= @group %>
+   <% end %>
+   <% if @user %>
+   user <%= @user %>
+   <% end %>
+   <% if @start_program %>
+   start program = "<%= @start_program %>"
+   <% end %>
+   <% if @stop_program %>
+   stop program = "<%= @stop_program %>"
+   <% end %>
+   <% if @if_action %>
+   if <%= @if_action %>
+   <% end %>

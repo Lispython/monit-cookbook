@@ -15,8 +15,8 @@ default["monit"]["alert_email_timeout"] = nil
 default["monit"]["web_interface"] = {
   "enable"  => false,
   "port"    => 2812,
-  "address" => "localhost",
-  "allow"   => "name:pass"
+  "address" => nil,
+  "allow"   => ["name:pass"]
 }
 
 default["monit"]["mail"] = {
@@ -42,3 +42,5 @@ end
 
 
 default["monit"]["defaultfile"] = "/etc/default/monit"
+default["monit"]["template"] = "config.erb"
+default["monit"]["script"] = "/usr/sbin/monit"
