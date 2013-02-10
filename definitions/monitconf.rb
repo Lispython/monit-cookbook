@@ -1,5 +1,4 @@
-define
-       :monitconf,
+define :monitconf,
        :name => nil,
        :variables => {},
        :template => nil,
