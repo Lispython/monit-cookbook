@@ -17,6 +17,7 @@ attribute :name, :kind_of => String, :name_attribute => true
 attribute :config, :kind_of => Hash, :default => {}
 attribute :template, :kind_of => String, :default => "cofig.erb"
 attribute :cookbook, :kind_of => String, :default => nil
+attribute :monit_action, :kind_of => String, :default => "start"
 
 
 def initialize(*args)

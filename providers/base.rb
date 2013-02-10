@@ -5,6 +5,13 @@ action :create do
   config["name"] = new_resource.name
   template = new_resource.template || node["monit"]["template"]
 
+  bash "monitconf-#{new_resource.name}" do
+    user "root"
+    code <<-EOH
+        monit #{new_resource.monit_action} #{new_resource.name}
+    EOH
+  end
+
   template "#{node[:monit][:includes_dir]}/#{new_resource.name}.conf" do
     owner "root"
     group "root"
@@ -12,6 +19,8 @@ action :create do
     source template
     variables config
     notifies :restart, resources(:service => "monit"), :delayed
+    notifies :run, resources(:bash => "monitconf-#{new_resource.name}")
+
     action :create
     if new_resource.cookbook
       cookbook new_resource.cookbook
