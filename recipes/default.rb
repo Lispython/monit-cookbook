@@ -24,15 +24,15 @@ directory node["monit"]["eventqueue"]["eventsdir"] do
   action :create
 end
 
+service "monit" do
+  supports :restart => true, :start => true, :stop => true
+  action [:enable, :start]
+end
 
 template "#{node["monit"]["main_config_path"]}" do
   owner  "root"
   group  "root"
   mode   "0700"
   source "monitrc.erb"
-end
-
-service "monit" do
-  supports :restart => true, :start => true, :stop => true
-  action [:enable, :start]
+  notifies :restart, resources(:service => "monit")
 end
