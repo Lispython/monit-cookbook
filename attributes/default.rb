@@ -1,10 +1,11 @@
 
 default["monit"]["logfile"] = "/var/log/monit"
-default["monit"]["use_syslog"]        = "true"
-default["monit"]["idfile"] = "/var/.monit.id"
-default["monit"]["statefile"] = "/var/.monit.state"
+default["monit"]["use_syslog"] = "true"
+default["monit"]["libdir"] = "/var/lib/monit"
+default["monit"]["idfile"] = "#{node["monit"]["libdir"]}/id"
+default["monit"]["statefile"] = "#{node["monit"]["libdir"]}/state"
 default["monit"]["daemon"] = "60"
-default["monit"]["daemon_start_delay"] = "240"
+default["monit"]["daemon_start_delay"] = false
 
 default["monit"]["configs"] = Array.new
 
@@ -43,4 +44,17 @@ end
 
 default["monit"]["defaultfile"] = "/etc/default/monit"
 default["monit"]["template"] = "config.erb"
-default["monit"]["script"] = "/usr/sbin/monit"
+
+case node[:platform]
+when "ubuntu"
+  if node[:platform_version].to_f < 11.04
+    default["monit"]["script"] = "/usr/sbin/monit"
+  else
+    default["monit"]["script"] = "/usr/bin/monit"
+  end
+end
+
+
+default["monit"]["eventqueue"]["on"] = true
+default["monit"]["eventqueue"]["eventsdir"] = "#{node["monit"]["libdir"]}/events"
+default["monit"]["eventqueue"]["slots"] = 100

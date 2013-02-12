@@ -14,6 +14,17 @@ cookbook_file node['monit']['defaultfile'] do
   mode "0644"
 end
 
+directory node["monit"]["libdir"] do
+  recursive true
+  action :create
+end
+
+directory node["monit"]["eventqueue"]["eventsdir"] do
+  recursive true
+  action :create
+end
+
+
 template "#{node["monit"]["main_config_path"]}" do
   owner  "root"
   group  "root"
@@ -23,5 +34,5 @@ end
 
 service "monit" do
   supports :restart => true, :start => true, :stop => true
-  action [:enable, :restart]
+  action [:enable, :start]
 end

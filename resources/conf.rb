@@ -11,13 +11,14 @@
 #
 
 
-actions :create, :delete
+actions :create, :delete, :enable, :restart, :stop
 
 attribute :name, :kind_of => String, :name_attribute => true
 attribute :config, :kind_of => Hash, :default => {}
 attribute :template, :kind_of => String, :default => "cofig.erb"
 attribute :cookbook, :kind_of => String, :default => nil
 attribute :monit_action, :kind_of => String, :default => "start"
+attribute :check_file, :kind_of => String
 
 
 def initialize(*args)
