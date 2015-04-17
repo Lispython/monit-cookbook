@@ -1,3 +1,4 @@
+name "monit"
 maintainer       "Alexandr Lispython"
 maintainer_email "alex@obout.ru"
 license          "MIT"
